@@ -6,9 +6,9 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: new ThemeData(scaffoldBackgroundColor: const Color(0xFF323232)),
+      // theme: new ThemeData(scaffoldBackgroundColor: const Color(0xFF323232)),
       home: HomeScreen(),
     );
   }

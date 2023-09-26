@@ -1,6 +1,9 @@
-import "dart:async";
-
 import "package:flutter/material.dart";
+import "dart:async";
+import 'package:webview_flutter/webview_flutter.dart';
+
+// import 'package:wallpaper_manager/wallpaper_manager.dart';
+import 'package:wallpaper_manager_flutter/wallpaper_manager_flutter.dart';
 
 StreamController<String> myStreamController = StreamController<String>();
 
@@ -10,6 +13,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF323232),
       appBar: myAppBar(),
       body: Column(
         children: [
@@ -30,6 +34,13 @@ class HomeScreen extends StatelessWidget {
               child: MyGridView(myStreamController.stream),
             ),
           ),
+          const SizedBox(height: 40),
+          const Expanded(
+            child: WebView(
+              initialUrl: "https://stablediffusionweb.com/",
+              javascriptMode: JavascriptMode.unrestricted,
+            ),
+          ),
         ],
       ),
     );
@@ -47,25 +58,28 @@ class MyGridView extends StatefulWidget {
 }
 
 class _MyGridViewState extends State<MyGridView> {
-  List<String> items = ["Item 1", "Item 2", "ITem 3"];
+  List<ImageData> items = [
+    ImageData(
+        "https://upload.wikimedia.org/wikipedia/commons/3/3e/Einstein_1921_by_F_Schmutzer_-_restoration.jpg"),
+    ImageData(
+        "https://media.geeksforgeeks.org/wp-content/uploads/bipartitegraph-1.jpg"),
+    ImageData("https://pbs.twimg.com/media/E8fPMUrVgAEyHrS?format=jpg"),
+    ImageData(
+        "https://static.wikia.nocookie.net/fictionalcompanies/images/b/b6/DkPepperDiet.jpg/revision/latest/scale-to-width-down/1000?cb=20170314131418"),
+  ];
 
   @override
   void initState() {
     super.initState();
     widget.stream.listen((text) {
-      addTextCard(text); // needs this here to actually update the cards
+      addTextCard(
+          ImageData(text)); // needs this here to actually update the cards
     });
   }
 
-  // void addItem() {
-  //   setState(() {
-  //     items.insert(0, "Item ${items.length + 1}");
-  //   });
-  // }
-
-  void addTextCard(String text) {
+  void addTextCard(ImageData imageData) {
     setState(() {
-      items.insert(0, text);
+      items.insert(0, imageData);
     });
   }
 
@@ -92,36 +106,32 @@ class _MyGridViewState extends State<MyGridView> {
               return Card(
                 margin: EdgeInsets.all(15),
                 child: Center(
-                  child: Text(
-                    items[index],
-                    style: const TextStyle(
-                      fontSize: 24.5,
-                    ),
+                  // child: Text(
+                  //   items[index],
+                  //   style: const TextStyle(
+                  //     fontSize: 24.5,
+                  //   ),
+                  // ),
+                  child: Image.network(
+                    items[index].imageURL,
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                    height: double.infinity,
                   ),
                 ),
               );
             },
           ),
         ),
-        const SizedBox(height: 20),
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        //   children: [
-        //     ElevatedButton(
-        //       onPressed: addItem,
-        //       child: Text("Add new item"),
-        //     ),
-        //     SizedBox(width: 20),
-        //     ElevatedButton(
-        //       onPressed: removeItem,
-        //       child: Text("Remove the last item"),
-        //     ),
-        //   ],
-        // ),
-        // const SizedBox(height: 20),
       ],
     );
   }
+}
+
+class ImageData {
+  final String imageURL;
+
+  ImageData(this.imageURL);
 }
 
 Container myPromptBar() {
@@ -150,7 +160,6 @@ Container myPromptBar() {
         hintStyle: TextStyle(color: Colors.white, fontSize: 20),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          // borderSide: BorderSide.none
         ),
       ),
       style: TextStyle(fontSize: 20),
