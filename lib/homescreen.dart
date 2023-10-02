@@ -1,7 +1,8 @@
 import "package:flutter/material.dart";
+import "package:studioai/process_prompt.dart";
 import "dart:async";
 // import 'package:webview_flutter/webview_flutter.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+// import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 // import 'package:wallpaper_manager/wallpaper_manager.dart';
 import 'package:wallpaper_manager_flutter/wallpaper_manager_flutter.dart';
@@ -33,44 +34,6 @@ class HomeScreen extends StatelessWidget {
             child: Container(
               // color: Colors.green,
               child: MyGridView(myStreamController.stream),
-            ),
-          ),
-          const SizedBox(height: 40),
-          Expanded(
-            child: InAppWebView(
-              initialUrlRequest: URLRequest(
-                url: Uri.parse("https://stablediffusionweb.com/"),
-              ),
-              initialOptions: InAppWebViewGroupOptions(
-                crossPlatform: InAppWebViewOptions(
-                    // Customize WebView options here
-                    ),
-              ),
-              onWebViewCreated: (InAppWebViewController controller) {
-                controller.addJavaScriptHandler(
-                  handlerName: 'myHandlerName',
-                  callback: (args) {
-                    // print arguments coming from the JavaScript side!
-                    print(args);
-
-                    // return data to the JavaScript side!
-                    return {'bar': 'bar_value', 'baz': 'baz_value'};
-                  },
-                );
-              },
-              onLoadStop: (controller, url) async {
-                await controller.evaluateJavascript(source: """
-                    const delay = async (ms) => new Promise(res => setTimeout(res, ms));
-                    const args = [1, true, ['bar', 5], {foo: 'baz'}];
-                    window.flutter_inappwebview.callHandler('myHandlerName', args);
-                    const promptBox = document.getElementById("inneriframeWebUI");
-                    try {
-                      window.flutter_inappwebview.callHandler('myHandlerName', promptBox.contentWindow);
-                    } catch (err) {
-                      window.flutter_inappwebview.callHandler('myHandlerName', "THERE WAS AN ERROR:", err);
-                    }
-                """);
-              },
             ),
           ),
         ],
@@ -177,11 +140,17 @@ Container myPromptBar() {
     ]),
     child: TextField(
       controller: promptController,
-      onSubmitted: (text) {
+      onSubmitted: (text) async {
         if (text.isNotEmpty) {
-          myStreamController.add(text);
-          promptController.clear();
-          print(text);
+          final imageURL = await generateImage(text);
+          if (imageURL != null) {
+            myStreamController.add(imageURL);
+            promptController.clear();
+            print("text : " + text);
+            print("imageURL : " + imageURL);
+          } else {
+            print("Failed to generate image.");
+          }
         }
       },
       decoration: InputDecoration(
