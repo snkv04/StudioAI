@@ -2,12 +2,12 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-@app.route("/")
-def hello_world():
-    return "Hello, world!"
-
 if __name__ == "__main__":
     app.run()
+
+# @app.route("/")
+# def hello_world():
+#     return "Hello, world!"
 
 @app.route("/api/generate_image", methods=["POST"])
 def generate_image():
