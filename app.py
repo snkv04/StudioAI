@@ -10,7 +10,7 @@ if __name__ == "__main__":
 #     return "Hello, world!"
 
 @app.route("/api/generate_image", methods=["POST"])
-def generate_image():
+def fetch_image():
     data = request.get_json()
     text = data.get("text")
     print(f"the text from the python backend is: {text}")

@@ -7,7 +7,7 @@ import "dart:async";
 // import 'package:wallpaper_manager/wallpaper_manager.dart';
 import 'package:wallpaper_manager_flutter/wallpaper_manager_flutter.dart';
 
-StreamController<String> myStreamController = StreamController<String>();
+StreamController<ImageData> myStreamController = StreamController<ImageData>();
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -46,7 +46,7 @@ class MyGridView extends StatefulWidget {
   // const MyGridView({super.key});
 
   MyGridView(this.stream);
-  final Stream<String> stream;
+  final Stream<ImageData> stream;
 
   @override
   _MyGridViewState createState() => _MyGridViewState();
@@ -55,20 +55,28 @@ class MyGridView extends StatefulWidget {
 class _MyGridViewState extends State<MyGridView> {
   List<ImageData> items = [
     ImageData(
-        "https://upload.wikimedia.org/wikipedia/commons/3/3e/Einstein_1921_by_F_Schmutzer_-_restoration.jpg"),
+      "some prompt 1",
+      "https://upload.wikimedia.org/wikipedia/commons/3/3e/Einstein_1921_by_F_Schmutzer_-_restoration.jpg",
+    ),
     ImageData(
-        "https://media.geeksforgeeks.org/wp-content/uploads/bipartitegraph-1.jpg"),
-    ImageData("https://pbs.twimg.com/media/E8fPMUrVgAEyHrS?format=jpg"),
+      "some prompt 2",
+      "https://media.geeksforgeeks.org/wp-content/uploads/bipartitegraph-1.jpg",
+    ),
     ImageData(
-        "https://static.wikia.nocookie.net/fictionalcompanies/images/b/b6/DkPepperDiet.jpg/revision/latest/scale-to-width-down/1000?cb=20170314131418"),
+      "some prompt3",
+      "https://pbs.twimg.com/media/E8fPMUrVgAEyHrS?format=jpg",
+    ),
+    ImageData(
+      "some prompt 4",
+      "https://static.wikia.nocookie.net/fictionalcompanies/images/b/b6/DkPepperDiet.jpg/revision/latest/scale-to-width-down/1000?cb=20170314131418",
+    ),
   ];
 
   @override
   void initState() {
     super.initState();
-    widget.stream.listen((text) {
-      addTextCard(
-          ImageData(text)); // needs this here to actually update the cards
+    widget.stream.listen((imageData) {
+      addTextCard(imageData); // needs this here to actually update the cards
     });
   }
 
@@ -124,9 +132,9 @@ class _MyGridViewState extends State<MyGridView> {
 }
 
 class ImageData {
-  final String imageURL;
+  final String imagePrompt, imageURL;
 
-  ImageData(this.imageURL);
+  ImageData(this.imagePrompt, this.imageURL);
 }
 
 Container myPromptBar() {
@@ -144,13 +152,15 @@ Container myPromptBar() {
         if (text.isNotEmpty) {
           final imageURL = await generateImage(text);
           if (imageURL != null) {
-            myStreamController.add(imageURL);
+            myStreamController.add(ImageData(text, imageURL));
             promptController.clear();
-            print("text : " + text);
-            print("imageURL : " + imageURL);
+            // print("text : " + text);
+            // print("imageURL : " + imageURL);
           } else {
             print("Failed to generate image.");
           }
+        } else {
+          print("Can't use empty prompt.");
         }
       },
       decoration: InputDecoration(

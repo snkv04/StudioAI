@@ -11,7 +11,7 @@ Future<String?> generateImage(String promptText) async {
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> responseData = jsonDecode(response.body);
-      print(responseData["imageURL"]);
+      // print(responseData["imageURL"]);
       return responseData['imageURL'];
     } else {
       return null;
