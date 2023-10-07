@@ -56,7 +56,7 @@ class MyGridView extends StatefulWidget {
 class _MyGridViewState extends State<MyGridView> {
   List<ImageData> items = [
     ImageData(
-      "some prompt 1 jklnfewjkl lkjn2ejk  fuifiofn io f2oen fi2ne fieon fej2on fejekwf hwjkf njwklf njwkl nfjk fenjwklfn ewlkfnew",
+      "test1",
       "https://upload.wikimedia.org/wikipedia/commons/3/3e/Einstein_1921_by_F_Schmutzer_-_restoration.jpg",
     ),
     ImageData(

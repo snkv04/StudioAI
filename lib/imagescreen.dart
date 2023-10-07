@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:wallpaper_manager_flutter/wallpaper_manager_flutter.dart';
+import 'package:wallpaper_manager_flutter/wallpaper_manager_flutter.dart';
 
 class ImageOptionScreen extends StatelessWidget {
   final String prompt, url;
@@ -71,7 +71,7 @@ class ImageOptionScreen extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   color: Colors.white),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
                 //
