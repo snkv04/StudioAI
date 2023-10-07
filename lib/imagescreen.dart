@@ -18,7 +18,7 @@ class ImageOptionScreen extends StatelessWidget {
         title: const Text(
           "Image Details",
           style: TextStyle(
-            color: Colors.red,
+            color: Colors.white,
             fontSize: 20,
           ),
         ),
