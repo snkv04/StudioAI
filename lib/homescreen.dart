@@ -64,7 +64,7 @@ class _MyGridViewState extends State<MyGridView> {
       "https://media.geeksforgeeks.org/wp-content/uploads/bipartitegraph-1.jpg",
     ),
     ImageData(
-      "some prompt3",
+      "test3",
       "https://pbs.twimg.com/media/E8fPMUrVgAEyHrS?format=jpg",
     ),
     ImageData(
