@@ -1,11 +1,12 @@
 import "package:flutter/material.dart";
+import "package:studioai/imagescreen.dart";
 import "package:studioai/process_prompt.dart";
 import "dart:async";
 // import 'package:webview_flutter/webview_flutter.dart';
 // import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 // import 'package:wallpaper_manager/wallpaper_manager.dart';
-import 'package:wallpaper_manager_flutter/wallpaper_manager_flutter.dart';
+// import 'package:wallpaper_manager_flutter/wallpaper_manager_flutter.dart';
 
 StreamController<ImageData> myStreamController = StreamController<ImageData>();
 
@@ -55,7 +56,7 @@ class MyGridView extends StatefulWidget {
 class _MyGridViewState extends State<MyGridView> {
   List<ImageData> items = [
     ImageData(
-      "some prompt 1",
+      "some prompt 1 jklnfewjkl lkjn2ejk  fuifiofn io f2oen fi2ne fieon fej2on fejekwf hwjkf njwklf njwkl nfjk fenjwklfn ewlkfnew",
       "https://upload.wikimedia.org/wikipedia/commons/3/3e/Einstein_1921_by_F_Schmutzer_-_restoration.jpg",
     ),
     ImageData(
@@ -86,12 +87,29 @@ class _MyGridViewState extends State<MyGridView> {
     });
   }
 
-  void removeItem() {
-    if (items.isNotEmpty) {
+  void removeItem(ImageData imageData) {
+    int index = items.indexOf(imageData);
+    if (index != -1) {
       setState(() {
-        items.removeLast();
+        items.removeAt(index);
       });
+    } else {
+      print("it was -1 bruh");
     }
+  }
+
+  void onCardTap(ImageData imageData) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => ImageOptionScreen(
+          prompt: imageData.imagePrompt,
+          url: imageData.imageURL,
+          onDelete: () {
+            removeItem(imageData);
+          },
+        ),
+      ),
+    );
   }
 
   @override
@@ -106,20 +124,21 @@ class _MyGridViewState extends State<MyGridView> {
               crossAxisCount: 2,
             ),
             itemBuilder: (BuildContext context, int index) {
-              return Card(
-                margin: EdgeInsets.all(15),
-                child: Center(
-                  // child: Text(
-                  //   items[index],
-                  //   style: const TextStyle(
-                  //     fontSize: 24.5,
-                  //   ),
-                  // ),
-                  child: Image.network(
-                    items[index].imageURL,
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                    height: double.infinity,
+              return GestureDetector(
+                onTap: () => onCardTap(
+                    items[index]), // passes the function as an argument
+                child: Card(
+                  color: const Color(
+                      0xFF323232), // colors the card the same as the background
+                  margin: EdgeInsets.all(15),
+                  child: Hero(
+                    tag: "myHero_${items[index].imageURL}",
+                    child: Image.network(
+                      items[index].imageURL,
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: double.infinity,
+                    ),
                   ),
                 ),
               );
@@ -142,10 +161,15 @@ Container myPromptBar() {
 
   return Container(
     margin: EdgeInsets.all(15),
-    decoration: BoxDecoration(boxShadow: [
-      BoxShadow(
-          color: Colors.black.withOpacity(0.2), blurRadius: 20, spreadRadius: 5)
-    ]),
+    decoration: BoxDecoration(
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.2),
+          blurRadius: 20,
+          spreadRadius: 5,
+        )
+      ],
+    ),
     child: TextField(
       controller: promptController,
       onSubmitted: (text) async {
@@ -173,7 +197,9 @@ Container myPromptBar() {
           borderRadius: BorderRadius.circular(10),
         ),
       ),
-      style: TextStyle(fontSize: 20),
+      style: const TextStyle(
+        fontSize: 20,
+      ),
     ),
   );
 }
@@ -182,7 +208,8 @@ AppBar myAppBar() {
   return AppBar(
     title: const Text(
       "StudioAI",
-      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+      style: TextStyle(
+          color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
     ),
     centerTitle: true,
     backgroundColor: Colors.black,
