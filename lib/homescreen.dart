@@ -60,7 +60,7 @@ class _MyGridViewState extends State<MyGridView> {
       "https://upload.wikimedia.org/wikipedia/commons/3/3e/Einstein_1921_by_F_Schmutzer_-_restoration.jpg",
     ),
     ImageData(
-      "some prompt 2",
+      "test2",
       "https://media.geeksforgeeks.org/wp-content/uploads/bipartitegraph-1.jpg",
     ),
     ImageData(
