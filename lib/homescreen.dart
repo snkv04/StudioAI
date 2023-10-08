@@ -55,6 +55,10 @@ class MyGridView extends StatefulWidget {
 class _MyGridViewState extends State<MyGridView> {
   List<ImageData> items = [
     ImageData(
+      "futuristic city",
+      "https://i.imgur.com/9P5AeBZ.png",
+    ),
+    ImageData(
       "autumn forest landscape",
       "https://i.imgur.com/8evaUhU.png",
     ),

@@ -27,7 +27,8 @@ pregenerated_images = {
     "lions in a savannah" : "https://i.imgur.com/QcjYOqz.png",
     "technologically futuristic city" : "https://i.imgur.com/qirietx.png",
     "random" : "https://i.imgur.com/uciYqr1.png",
-    "autumn forest landscape" : "https://i.imgur.com/8evaUhU.png"
+    "autumn forest landscape" : "https://i.imgur.com/8evaUhU.png",
+    "futuristic city" : "https://i.imgur.com/9P5AeBZ.png",
 }
     
 def generate_image(prompt):
