@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:image_downloader/image_downloader.dart';
+import 'package:http/http.dart' as http;
+import 'dart:io';
+// import 'dart:async';
+import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 class ImageOptionScreen extends StatelessWidget {
   final String prompt, url;
@@ -42,6 +48,7 @@ class ImageOptionScreen extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
                 ),
+                const SizedBox(width: 15),
                 Flexible(
                   fit: FlexFit.loose,
                   child: Text(
@@ -72,8 +79,13 @@ class ImageOptionScreen extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             ElevatedButton(
-              onPressed: () {
-                //
+              onPressed: () async {
+                try {
+                  var imageID = await ImageDownloader.downloadImage(url);
+                  print("successfully downloaded image");
+                } catch (err) {
+                  print("error: $err");
+                }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,
@@ -82,7 +94,7 @@ class ImageOptionScreen extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.all(10),
                 child: const Text(
-                  "Set as home screen wallpaper",
+                  "Download",
                   style: TextStyle(
                     fontSize: 20,
                     color: Colors.white,
@@ -92,8 +104,22 @@ class ImageOptionScreen extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             ElevatedButton(
-              onPressed: () {
-                //
+              onPressed: () async {
+                try {
+                  final response = await http.get((Uri.parse(url)));
+                  final tempDir = await getTemporaryDirectory();
+                  final filePath = "${tempDir.path}/image.png";
+                  final imageFile = File(filePath);
+                  await imageFile.writeAsBytes(response.bodyBytes);
+                  await Share.shareXFiles(
+                    [XFile(filePath)],
+                    // text: "An AI-generated image based on the prompt '$prompt'",
+                  );
+
+                  print("successfully shared image");
+                } catch (err) {
+                  print("error: $err");
+                }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,
@@ -102,27 +128,7 @@ class ImageOptionScreen extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.all(10),
                 child: const Text(
-                  "Set as lock screen wallpaper",
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: () {
-                //
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black,
-                elevation: 0.0,
-              ),
-              child: Container(
-                padding: EdgeInsets.all(10),
-                child: const Text(
-                  "Set as wallpaper for both screens",
+                  "Share image",
                   style: TextStyle(
                     fontSize: 20,
                     color: Colors.white,

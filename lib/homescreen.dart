@@ -56,20 +56,20 @@ class MyGridView extends StatefulWidget {
 class _MyGridViewState extends State<MyGridView> {
   List<ImageData> items = [
     ImageData(
-      "test1",
-      "https://upload.wikimedia.org/wikipedia/commons/3/3e/Einstein_1921_by_F_Schmutzer_-_restoration.jpg",
+      "autumn forest landscape",
+      "https://i.imgur.com/8evaUhU.png",
     ),
     ImageData(
-      "test2",
-      "https://media.geeksforgeeks.org/wp-content/uploads/bipartitegraph-1.jpg",
+      "technologically futuristic city",
+      "https://i.imgur.com/qirietx.png",
     ),
     ImageData(
-      "test3",
-      "https://pbs.twimg.com/media/E8fPMUrVgAEyHrS?format=jpg",
+      "lions in a savannah",
+      "https://i.imgur.com/QcjYOqz.png",
     ),
     ImageData(
-      "test4",
-      "https://static.wikia.nocookie.net/fictionalcompanies/images/b/b6/DkPepperDiet.jpg/revision/latest/scale-to-width-down/1000?cb=20170314131418",
+      "alan turing",
+      "https://i.imgur.com/Lf4iaVa.png",
     ),
   ];
 
