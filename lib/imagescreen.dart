@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:studioai/wallpaper_function.dart';
 
 class ImageOptionScreen extends StatelessWidget {
   final String prompt, url;
@@ -74,7 +73,7 @@ class ImageOptionScreen extends StatelessWidget {
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
-                setWallpaper(url, "home");
+                //
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,
@@ -94,7 +93,7 @@ class ImageOptionScreen extends StatelessWidget {
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
-                setWallpaper(url, "lock screen");
+                //
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,
@@ -114,7 +113,7 @@ class ImageOptionScreen extends StatelessWidget {
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
-                setWallpaper(url, "both");
+                //
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,
