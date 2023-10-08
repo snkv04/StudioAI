@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:image_downloader/image_downloader.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
-// import 'dart:async';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -82,7 +81,7 @@ class ImageOptionScreen extends StatelessWidget {
               onPressed: () async {
                 try {
                   var imageID = await ImageDownloader.downloadImage(url);
-                  print("successfully downloaded image");
+                  // print("successfully downloaded image");
                 } catch (err) {
                   print("error: $err");
                 }
@@ -115,8 +114,7 @@ class ImageOptionScreen extends StatelessWidget {
                     [XFile(filePath)],
                     // text: "An AI-generated image based on the prompt '$prompt'",
                   );
-
-                  print("successfully shared image");
+                  // print("successfully shared image");
                 } catch (err) {
                   print("error: $err");
                 }

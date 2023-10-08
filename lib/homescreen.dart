@@ -4,7 +4,6 @@ import "package:studioai/process_prompt.dart";
 import "dart:async";
 // import 'package:webview_flutter/webview_flutter.dart';
 // import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-
 // import 'package:wallpaper_manager/wallpaper_manager.dart';
 // import 'package:wallpaper_manager_flutter/wallpaper_manager_flutter.dart';
 
@@ -60,8 +59,8 @@ class _MyGridViewState extends State<MyGridView> {
       "https://i.imgur.com/8evaUhU.png",
     ),
     ImageData(
-      "futuristic city",
-      "https://i.imgur.com/9P5AeBZ.png",
+      "technologically futuristic city",
+      "https://i.imgur.com/qirietx.png",
     ),
     ImageData(
       "lions in a savannah",

@@ -31,7 +31,7 @@ pregenerated_images = {
 }
     
 def generate_image(prompt):
-    # infeasible to access actual third-party image generation software
+    # infeasible to access actual third-party image generation software, unfortunately
     # code would go here
     time.sleep(6)
     if (prompt in pregenerated_images):
