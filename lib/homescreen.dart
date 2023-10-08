@@ -60,8 +60,8 @@ class _MyGridViewState extends State<MyGridView> {
       "https://i.imgur.com/8evaUhU.png",
     ),
     ImageData(
-      "technologically futuristic city",
-      "https://i.imgur.com/qirietx.png",
+      "futuristic city",
+      "https://i.imgur.com/9P5AeBZ.png",
     ),
     ImageData(
       "lions in a savannah",
