@@ -59,7 +59,7 @@ class ImageOptionScreen extends StatelessWidget {
               child: Hero(
                 tag: "myHero_${url}",
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(15),
                   child: Image.network(url),
                 ),
               ),
