@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wallpaper_manager_flutter/wallpaper_manager_flutter.dart';
+import 'package:studioai/wallpaper_function.dart';
 
 class ImageOptionScreen extends StatelessWidget {
   final String prompt, url;
@@ -74,7 +74,7 @@ class ImageOptionScreen extends StatelessWidget {
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
-                //
+                setWallpaper(url, "home");
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,
@@ -94,7 +94,7 @@ class ImageOptionScreen extends StatelessWidget {
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
-                //
+                setWallpaper(url, "lock screen");
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,
@@ -104,6 +104,26 @@ class ImageOptionScreen extends StatelessWidget {
                 padding: EdgeInsets.all(10),
                 child: const Text(
                   "Set as lock screen wallpaper",
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                setWallpaper(url, "both");
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black,
+                elevation: 0.0,
+              ),
+              child: Container(
+                padding: EdgeInsets.all(10),
+                child: const Text(
+                  "Set as wallpaper for both screens",
                   style: TextStyle(
                     fontSize: 20,
                     color: Colors.white,
