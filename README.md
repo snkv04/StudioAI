@@ -1,16 +1,7 @@
 # studioai
 
-A new Flutter project.
+[Link to demo video](https://youtu.be/b1H3Xr5F1rE)
 
-## Getting Started
+## Description
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+StudioAI is a mobile application that enables users to generate images from prompts with AI and store them in a gallery, where they can download and share the images. Used Flutter, Flask.
