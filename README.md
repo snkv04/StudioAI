@@ -1,4 +1,4 @@
-# studioai
+# StudioAI
 
 [Link to demo video](https://youtu.be/b1H3Xr5F1rE)
 
